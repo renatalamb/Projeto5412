@@ -21,6 +21,8 @@ public class Gerente {
         // Utilizar uma função de hash armazenada
         return senha.equals(senhaHash);
     }
+
+    /*
     // O Gerente vai poder editar os dados do funcionario
     // Essa funçao ele podera editar o nome
     public void editarnomeFuncionario (String nome){
@@ -29,7 +31,9 @@ public class Gerente {
             System.out.println("Funcionário não encontrado.");
             return;
         }
-    }
+     }
+     */
+}
 
 
 
