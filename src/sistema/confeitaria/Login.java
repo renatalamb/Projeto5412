@@ -1,4 +1,4 @@
-package sitema.confeitaria.login;
+package sistema.confeitaria;
 
 import java.util.HashMap;
 import java.util.Map;
