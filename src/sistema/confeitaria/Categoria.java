@@ -1,4 +1,4 @@
-package sitema.confeitaria;
+package sistema.confeitaria;
 
 import java.util.ArrayList;
 import java.util.List;
