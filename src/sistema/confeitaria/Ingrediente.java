@@ -116,11 +116,4 @@ public class Ingrediente {
         }
 
     }
-
-    public static void main(String[] args) {
-        criarIngrediente();
-        criarIngrediente();
-        criarIngrediente();
-        listarIngredientes();
-    }
 }
