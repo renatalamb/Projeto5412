@@ -36,17 +36,5 @@ public class Funcionario {
         System.out.println("Telemóvel: " + telemovel);
     }
 
-    public static void main(String[] args) {
-
-        String data="20/07/2000";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate data_nasc = LocalDate.parse(data, formatter);
-
-        Funcionario funcionario= new Funcionario("Branca", "rua xpto", data_nasc, 1000, "123@gmail.com", 911119191);
-
-        funcionario.exibirInformacoes();
-
-    }
 
 }
