@@ -2,6 +2,7 @@ package sistema.confeitaria;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 public class Usuario {
     //Atributos
     private String nome;
-    private String palPasse;
+    private static String palPasse;
     private String cargo;
     private String morada;
     private String email;
@@ -43,36 +44,52 @@ public class Usuario {
     //Metodo
     public static void criarUsuario() {
         Scanner sc = new Scanner(System.in);
+
         // Entrada de dados usuario: nome
-        System.out.printf("Digite o nome do usuario: ");
+        System.out.printf("Nome: ");
         String nome = sc.nextLine();
 
         // Lê email
-        System.out.printf("Digite o email do usuario: ");
+        System.out.printf("Email: ");
         String email = sc.nextLine();
 
         // Usando a função para verificar se o já é email existente
-        verificarEmailExistente(email);
-
-        // Lê email
-        System.out.printf("Cargo: ");
-        String cargo = sc.nextLine();
-        CargoUsuario.Cargo novocargo = CargoUsuario.Cargo.valueOf(cargo.toUpperCase());
-
-        /*
-        try {
-            CargoUsuario.Cargo novocargo = CargoUsuario.Cargo.valueOf(cargo.toUpperCase());
-            System.out.println("Você digitou: " + cargo);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Cargo inválido!");
+        if (verificarEmailExistente(email)) {
+            System.out.println("Erro: Email já cadastrado. Tente novamente com outro email.");
+            return;
         }
 
-         */
+        //Inicializa novocargo como nulo
+        CargoUsuario.Cargo novocargo = null;
+
+        // Lê cargo
+        do {
+            System.out.printf("Cargo (Gerente ou Funcionario): ");
+            String cargo = sc.nextLine().trim(); // Remove espaços extras da entrada
+            try {
+                // Converte para maiúsculas para evitar erros de case e tenta converter para enum
+                novocargo = CargoUsuario.Cargo.valueOf(cargo.toUpperCase());
+                break; // Se a conversão foi bem-sucedida, sai do loop
+            } catch (IllegalArgumentException e) {
+                // Mensagem de erro se o cargo digitado for inválido
+                System.out.println("Cargo inválido! Digite 'Gerente' ou 'Funcionario'.");
+            }
+        } while (true);
 
         // Lê data de nascimento
-        System.out.printf("Data de nascimento: ");
-        String dataNascimento = sc.nextLine();
-        LocalDate novadataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate novadataNascimento;
+        do {
+            System.out.printf("Data de nascimento (dd/MM/yyyy): ");
+            String dataNascimento = sc.nextLine();
+
+            // Verifica se a data é válida
+            if (verificarDataValida(dataNascimento)) {
+                novadataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                break; // Sai do loop se a data for válida
+            } else {
+                System.out.println("Por favor, insira uma data válida.");
+            }
+        } while (true);
 
         // Lê morada
         System.out.printf("Morada: ");
@@ -88,15 +105,29 @@ public class Usuario {
         double salario = sc.nextDouble();
         sc.nextLine();
 
-        // Lê palavra passe
-        System.out.printf("Digite palPasse do usuario: ");
-        String palPasse = sc.nextLine();
+        // Lê palavra passe e confirma
+        String palPasseConf;
+        String palPasseTemp;
+        do {
+            System.out.printf("Digite palavra passe: ");
+            palPasseTemp = sc.nextLine();
+            System.out.print("Confirme palavra passe: ");
+            palPasseConf = sc.nextLine();
+
+            if (palPasseTemp.equals(palPasseConf)) {
+                palPasse = palPasseTemp;
+                System.out.println("Palavra passe registada com sucesso.");
+            } else {
+                System.out.println("Palavra passe não confirmada. Tente novamente.");
+            }
+        } while (!palPasseTemp.equals(palPasseConf));
 
         Usuario novoUsuario = new Usuario(nome, email, novocargo, novadataNascimento, morada, telemovel, salario, palPasse);
         usuarios.add(novoUsuario);
 
         System.out.println("Registo de utilizador feito com sucesso!");
 
+        sc.close();
     }
 
     //Obter nome do usuario
@@ -113,6 +144,25 @@ public class Usuario {
         }
         return false; // Nome não existe
     }
+
+    public static boolean verificarDataValida(String data) {
+        try {
+            // Formato esperado da data (dd/MM/yyyy)
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            // Tenta converter a string para um objeto LocalDate
+            LocalDate dataValida = LocalDate.parse(data, formatter);
+
+            // Se a conversão for bem-sucedida, significa que a data é válida
+            return true;
+
+        } catch (DateTimeParseException e) {
+            // Se não conseguir converter a data, significa que ela é inválida
+            System.out.println("Erro: A data inserida não existe. Use dd/MM/yyyy.");
+            return false;
+        }
+    }
+
     public static void main (String [] args) {
         criarUsuario();
 

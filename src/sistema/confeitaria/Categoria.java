@@ -93,8 +93,6 @@ public class Categoria {
         Categoria.criarCategoria();
 
         listarCategorias();
-
-
     }
 }
 
