@@ -86,13 +86,5 @@ public class Categoria {
     }
 
 
-    public static void main(String[] args) {
-        //Testando método exibirCategoria
-        Categoria.criarCategoria();
-        Categoria.criarCategoria();
-        Categoria.criarCategoria();
-
-        listarCategorias();
-    }
 }
 
