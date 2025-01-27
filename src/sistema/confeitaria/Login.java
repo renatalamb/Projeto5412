@@ -4,12 +4,16 @@ import java.util.Map;
 import java.util.Scanner;
 public class Login {
     private Map<String, String> usuarios = new HashMap<>();
+
+
     // Construtor
     public Login() {
-// Adiciona um usuário inicial ao sistema
+    // Adiciona um usuário inicial ao sistema
         usuarios.put("admin", "senha123");
     }
-    private boolean estaLogado = false;
+
+    //private boolean estaLogado = false;
+
     // Adiciona novos usuários com validação
     public void adicionarUsuario(String usuario, String palPasse) {
         if (usuarios.containsKey(usuario)) {
