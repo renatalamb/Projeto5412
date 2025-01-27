@@ -126,13 +126,21 @@ public class Usuario {
         usuarios.add(novoUsuario);
 
         System.out.println("Registo de utilizador feito com sucesso!");
-
-        sc.close();
     }
 
     //Obter nome do usuario
     public String obterEmail() {
         return email;
+    }
+
+    //Obter palavra passe
+    public String obterPalPasse() {
+        return palPasse;
+    }
+
+    //Obter lista de usuarios
+    public static List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
     //Metodo para veirifcar se o Usuario já existe
@@ -163,9 +171,5 @@ public class Usuario {
         }
     }
 
-    public static void main (String [] args) {
-        criarUsuario();
-
-    }
 
 }
