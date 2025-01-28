@@ -18,15 +18,10 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    //Obter nome da categoria
-    public String obterNome() {
-        return nome;
-    }
 
-
-    //Obter descrição da categoria
-    public String obterDescricao() {
-        return descricao;
+    // Getter para a lista de categorias
+    public static List<Categoria> getCategorias() {
+        return categorias;
     }
 
     //Método
@@ -64,7 +59,7 @@ public class Categoria {
     //Metodo para veirifcar se a Categoria já existe
     public static boolean verificarNomeExistente(String nome) {
         for (Categoria categoria : categorias) {
-            if (categoria.obterNome().equalsIgnoreCase(nome)) {
+            if (categoria.getNome().equalsIgnoreCase(nome)) {
                 return true; // Nome já existe
             }
         }
@@ -86,5 +81,28 @@ public class Categoria {
     }
 
 
+    //Obter nome da categoria
+    public String getNome() {
+        return nome;
+    }
+
+
+    //Obter descrição da categoria
+    public String getDescricao() {
+        return descricao;
+    }
+
+    //Setter dos atributos e lista
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public static void setCategorias(List<Categoria> categorias) {
+        Categoria.categorias = categorias;
+    }
 }
 
