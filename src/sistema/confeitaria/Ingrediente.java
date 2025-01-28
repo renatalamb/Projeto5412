@@ -20,6 +20,7 @@ public class Ingrediente {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static List<Ingrediente> listaIngredientes = new ArrayList();
 
+    //Contrutor
     public Ingrediente(String nome, int quantidade, String unidadeMedida, int quantMinima, LocalDate dataValidade) {
         this.nome = nome;
         this.quantidade = quantidade;
