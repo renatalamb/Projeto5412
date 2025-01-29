@@ -43,17 +43,6 @@ public class ProdutoFinal {
         System.out.print("Nome do produto: ");
         String nomeProduto = sc.nextLine();
 
-        // Usar DateTimeFormatter para converter a data para o formato correto
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        //System.out.print("Data de produção (dd/MM/yyyy): ");
-        //String dataProducaoStr = sc.nextLine();
-        //LocalDate dataProducao = LocalDate.parse(dataProducaoStr, formatter);
-
-        //System.out.print("Data de validade (dd/MM/yyyy): ");
-        //String dataValidadeStr = sc.nextLine();
-        //LocalDate dataValidade = LocalDate.parse(dataValidadeStr, formatter);
-
         System.out.print("Quantidade em estoque: ");
         int qtdEstoque = sc.nextInt();
 
@@ -62,6 +51,9 @@ public class ProdutoFinal {
 
         // Cria um novo produto final
         ProdutoFinal produto = new ProdutoFinal(nomeProduto, qtdEstoque, qtdMinima, categoriaEscolhida);
+
+        // Adiciona o produto a lista de produtos da categoria
+        categoriaEscolhida.adicionarProduto(produto);
 
         // Chama metodo para lançar o produto no sistema
         produto.lancarProdutoNoSistema();
