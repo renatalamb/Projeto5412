@@ -1,4 +1,6 @@
-package sistema.confeitaria;
+package main.java.com.confeitaria.controller;
+import main.java.com.confeitaria.model.Usuario;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
