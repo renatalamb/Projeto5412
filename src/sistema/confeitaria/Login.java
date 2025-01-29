@@ -55,7 +55,7 @@ public class Login {
         int opcao = 0;
         do {
             System.out.println("\n===== Menu =====");
-            System.out.println("1. Cadastrar funcionário");
+            System.out.println("1. Registar funcionário");
             System.out.println("2. Fazer Login");
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
