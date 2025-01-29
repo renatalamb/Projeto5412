@@ -1,4 +1,6 @@
-package sistema.confeitaria;
+package main.java.com.confeitaria;
+
+import main.java.com.confeitaria.controller.Login;
 
 public class Main {
     public static void main(String[] args) {

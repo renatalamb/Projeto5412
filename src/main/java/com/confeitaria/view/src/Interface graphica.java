@@ -1,3 +1,5 @@
+package main.java.com.confeitaria.view.src;
+
 import javax.swing.*;
 
 class Main {

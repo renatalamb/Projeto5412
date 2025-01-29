@@ -1,4 +1,4 @@
-package sistema.confeitaria;
+package main.java.com.confeitaria.model;
 
 import javax.xml.crypto.Data;
 
