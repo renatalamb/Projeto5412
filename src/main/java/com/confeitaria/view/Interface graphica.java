@@ -1,4 +1,4 @@
-package main.java.com.confeitaria.view.src;
+package main.java.com.confeitaria.view;
 
 import javax.swing.*;
 
