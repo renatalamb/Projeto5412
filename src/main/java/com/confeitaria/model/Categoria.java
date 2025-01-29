@@ -11,11 +11,15 @@ public class Categoria {
     // Lista para armazenar todas as categorias criadas
     private static List<Categoria> categorias = new ArrayList<>();
 
+    // Lista de produtos associados à categoria
+    private List<ProdutoFinal> produtos;
+
 
     //Construtor
     public Categoria(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
+        this.produtos = new ArrayList<>(); // Inicializa a lista de produtos
     }
 
 
@@ -24,7 +28,22 @@ public class Categoria {
         return categorias;
     }
 
-    //Método
+    //Getter para a lista de produtos
+    public List<ProdutoFinal> getProdutos() {
+        return produtos;
+    }
+
+    // Método para associar um produto à categoria
+    public void adicionarProduto(ProdutoFinal produto) {
+        produtos.add(produto);
+    }
+
+    // Método para remover um produto da categoria
+    public void removerProduto(ProdutoFinal produto) {
+        produtos.remove(produto);
+    }
+
+    //Método para exibir categorias
     public void exibirCategoria() {
         System.out.println("Nome: " + nome);
         System.out.println("Descrição: " + descricao);
@@ -80,6 +99,43 @@ public class Categoria {
         }
     }
 
+
+    public static void editarCategoria(String nomeCategoria, String novoNome, String novaDescricao) {
+        Categoria categoria = buscarCategoriaPorNome(nomeCategoria);
+        if (categoria != null) {
+            categoria.setNome(novoNome);
+            categoria.setDescricao(novaDescricao);
+            System.out.println("Categoria editada com sucesso!");
+        } else {
+            System.out.println("Categoria não encontrada!");
+        }
+    }
+
+    public static void excluirCategoria(String nomeCategoria) {
+        Categoria categoria = buscarCategoriaPorNome(nomeCategoria);  // Supondo que você tenha um método de busca
+        if (categoria != null) {
+            if (categoria.getProdutos().isEmpty()) {
+                // A categoria pode ser excluída
+                Categoria.getCategorias().remove(categoria);
+                System.out.println("Categoria excluída com sucesso!");
+            } else {
+                // Não é possível excluir a categoria porque ela tem produtos associados
+                System.out.println("Erro: Não é possível excluir a categoria porque ela contém produtos associados.");
+            }
+        } else {
+            System.out.println("Categoria não encontrada!");
+        }
+    }
+
+
+    public static Categoria buscarCategoriaPorNome(String nome) {
+        for (Categoria categoria : Categoria.getCategorias()) {
+            if (categoria.getNome().equalsIgnoreCase(nome)) {
+                return categoria;
+            }
+        }
+        return null;
+    }
 
     //Obter nome da categoria
     public String getNome() {
