@@ -1,12 +1,14 @@
 package main.java.com.confeitaria.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Categoria {
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nome;
-    private String descricao;
 
     // Lista para armazenar todas as categorias criadas
     private static List<Categoria> categorias = new ArrayList<>();
@@ -16,9 +18,8 @@ public class Categoria {
 
 
     //Construtor
-    public Categoria(String nome, String descricao) {
+    public Categoria(String nome) {
         this.nome = nome;
-        this.descricao = descricao;
         this.produtos = new ArrayList<>(); // Inicializa a lista de produtos
     }
 
@@ -46,7 +47,6 @@ public class Categoria {
     //Método para exibir categorias
     public void exibirCategoria() {
         System.out.println("Nome: " + nome);
-        System.out.println("Descrição: " + descricao);
     }
 
     //Método para criar nova Categoria e salvar
@@ -63,11 +63,8 @@ public class Categoria {
             return; //Interrompe a criação
         }
 
-        //Lê descrição da categoria
-        System.out.print("Descrição da categoria: ");
-        String descricao = sc.nextLine();
 
-        Categoria novaCategoria = new Categoria(nome, descricao);
+        Categoria novaCategoria = new Categoria(nome);
         categorias.add(novaCategoria);
 
         System.out.println("Categoria criada com sucesso!");
@@ -104,7 +101,6 @@ public class Categoria {
         Categoria categoria = buscarCategoriaPorNome(nomeCategoria);
         if (categoria != null) {
             categoria.setNome(novoNome);
-            categoria.setDescricao(novaDescricao);
             System.out.println("Categoria editada com sucesso!");
         } else {
             System.out.println("Categoria não encontrada!");
@@ -142,19 +138,9 @@ public class Categoria {
         return nome;
     }
 
-
-    //Obter descrição da categoria
-    public String getDescricao() {
-        return descricao;
-    }
-
     //Setter dos atributos e lista
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public static void setCategorias(List<Categoria> categorias) {
