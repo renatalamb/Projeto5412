@@ -1,12 +1,14 @@
 package main.java.com.confeitaria.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProdutoFinal {
+public class ProdutoFinal implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     //Atributos da classe ProdutoFinal
     private String nome;
