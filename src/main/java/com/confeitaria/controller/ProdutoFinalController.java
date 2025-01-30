@@ -2,6 +2,7 @@ package main.java.com.confeitaria.controller;
 
 import main.java.com.confeitaria.model.Categoria;
 import main.java.com.confeitaria.model.ProdutoFinal;
+import main.java.com.confeitaria.repository.ProdutoFinalRepository;
 import main.java.com.confeitaria.service.ProdutoFinalService;
 
 import java.util.List;
@@ -93,5 +94,21 @@ public class ProdutoFinalController {
 
     public static void mostrarDados(ProdutoFinal produto) {
         ProdutoFinalService.exibirDados(produto);
+    }
+
+    public static void salvarProdutosCSV(List<ProdutoFinal> produtos) {
+        ProdutoFinalRepository.exportarParaCSV(produtos);
+    }
+
+    public static List<ProdutoFinal> carregarProdutosCSV() {
+        return ProdutoFinalRepository.importarDeCSV();
+    }
+
+    public static void salvarProdutosBinario(List<ProdutoFinal> produtos) {
+        ProdutoFinalRepository.exportarParaBinario(produtos);
+    }
+
+    public static List<ProdutoFinal> carregarProdutosBinario() {
+        return ProdutoFinalRepository.importarDeBinario();
     }
 }
