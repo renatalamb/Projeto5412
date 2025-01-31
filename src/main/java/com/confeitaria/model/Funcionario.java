@@ -5,36 +5,52 @@ import java.time.format.DateTimeFormatter;
 
 public class Funcionario {
 
+    private String nome;
+    private String morada;
+    private String email;
+    private LocalDate dataDeNascimento;
+    private double salario;
+    private int telemovel;
 
-    // Atributos (ou variáveis de instância)
-    String nome;
-    String morada;
-    String email;
-    LocalDate data_de_nascimento; // Vamos usar apenas o ano de nascimento, por exemplo.
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    double salario;
-    int telemovel;  // Alterado para String, já que é um número de telefone.
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     // Construtor
-    public Funcionario(String nome, String morada, LocalDate data_de_nascimento, double salario, String email, int
-            telemovel){
+    public Funcionario(String nome, String morada, LocalDate dataDeNascimento, double salario, String email, int telemovel) {
         this.nome = nome;
         this.morada = morada;
-        this.data_de_nascimento = data_de_nascimento;
+        this.dataDeNascimento = dataDeNascimento;
         this.salario = salario;
         this.email = email;
         this.telemovel = telemovel;
     }
 
-    // Metodo
-    public void exibirInformacoes () {
+    // Getters e Setters
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public String getMorada() { return morada; }
+    public void setMorada(String morada) { this.morada = morada; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public LocalDate getDataDeNascimento() { return dataDeNascimento; }
+    public void setDataDeNascimento(LocalDate dataDeNascimento) { this.dataDeNascimento = dataDeNascimento; }
+
+    public double getSalario() { return salario; }
+    public void setSalario(double salario) { this.salario = salario; }
+
+    public int getTelemovel() { return telemovel; }
+    public void setTelemovel(int telemovel) { this.telemovel = telemovel; }
+
+    // Método para exibir informações
+    public void exibirInformacoes() {
+        System.out.println("\n--- Informações do Funcionário ---");
         System.out.println("Nome: " + nome);
         System.out.println("Morada: " + morada);
-        System.out.println("Ano de Nascimento: " + data_de_nascimento.format(formatter));
+        System.out.println("Data de Nascimento: " + dataDeNascimento.format(FORMATTER));
         System.out.println("Salário: " + salario);
         System.out.println("Email: " + email);
         System.out.println("Telemóvel: " + telemovel);
     }
-
-
 }
