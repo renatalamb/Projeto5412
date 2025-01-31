@@ -5,6 +5,7 @@ import main.java.com.confeitaria.service.IngredienteService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class IngredienteController {
     private final IngredienteService service = new IngredienteService();
     private final Scanner scanner = new Scanner(System.in);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public void criarIngrediente() {
         System.out.println("Digite o nome do ingrediente: ");
@@ -39,7 +41,17 @@ public class IngredienteController {
 
             System.out.println("Digite a data de validade (dd/MM/yyyy): ");
             String dataValidadeStr = scanner.nextLine();
-            LocalDate dataValidade = LocalDate.parse(dataValidadeStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate dataValidade;
+
+            //tratar erro na formatação de data
+
+            try {
+                dataValidade = LocalDate.parse(dataValidadeStr, formatter);
+            }
+            catch (DateTimeParseException e) {
+                System.out.println("Erro: Formato de data invalido! use dd/MM/yyyy");
+                return; //Sai do metodo sem registar o ingrediente
+            }
 
             service.adicionarIngrediente(new Ingrediente(nome, quantidade, unidadeMedida, quantMinima, dataValidade));
             System.out.println("Ingrediente registrado com sucesso!");
