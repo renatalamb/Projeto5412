@@ -16,7 +16,7 @@ public class Ingrediente {
     private int quantidade;
     private String unidadeMedida;
     private int quantMinima;
-    private LocalDate dataValidade;
+    public LocalDate dataValidade;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static List<Ingrediente> listaIngredientes = new ArrayList();
 
@@ -28,6 +28,7 @@ public class Ingrediente {
         this.quantMinima = quantMinima;
         this.dataValidade = dataValidade;
     }
+
 
     public void exibirDados() {
         System.out.println("Nome: " + this.nome);
@@ -45,22 +46,32 @@ public class Ingrediente {
         String nome = sc.nextLine();
 
         //Verifica se existe ingrediente registado com este nome
-        if (verificarNomeExistente(nome)) {
-            System.out.println("Já existe um ingrediente com esse nome.");
-            //Caso nao exista continua com os outros dados
+        Ingrediente ingredienteExistente = buscarIngrediente(nome);
+
+        if (ingredienteExistente != null) {
+            System.out.println("Ingrediente já cadastrado! Atualizando estoque...");
+
+            System.out.println("Quantidade a adicionar ao estoque: ");
+            int quantidadeAdicional = sc.nextInt();
+            sc.nextLine();
+
+            // Atualiza quantidade do estoque
+            ingredienteExistente.quantidade += quantidadeAdicional;
+            System.out.println("✅ Estoque atualizado! Nova quantidade: " + ingredienteExistente.quantidade);
+
         } else {
             //Le quantidade que será adicionada ao estoque
-            System.out.println("Digite o quantidade do ingrediente: ");
+            System.out.println("Quantidade: ");
             int quantidade = sc.nextInt();
             sc.nextLine();
 
             //Le unidade de medida (kg ou unidade)
             //****** fazer enum
-            System.out.println("Digite o unidade do ingrediente: ");
+            System.out.println("Unidade de medida (kg, ml ou und): ");
             String unidadeMedida = sc.nextLine();
 
             //Le quantidade minima necessaria em estoque
-            System.out.println("Digite o quantidade mínima do ingrediente: ");
+            System.out.println("Quantidade mínima em estoque: ");
             int quantMinima = sc.nextInt();
             sc.nextLine();
 
@@ -69,6 +80,7 @@ public class Ingrediente {
             String dataValidade = sc.nextLine();
             LocalDate novadataValidade = LocalDate.parse(dataValidade, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
+            //Adiciona ingrediente a lista
             listaIngredientes.add(new Ingrediente(nome, quantidade, unidadeMedida, quantMinima, novadataValidade));
             System.out.println("Ingrediente registado com sucesso!");
         }
@@ -86,7 +98,7 @@ public class Ingrediente {
         return this.unidadeMedida;
     }
 
-    public int getQuantMinima() {
+    public int getQuantMinima(int quantidade) {
         return this.quantMinima;
     }
 
@@ -94,27 +106,59 @@ public class Ingrediente {
         return this.formatter;
     }
 
-    public static boolean verificarNomeExistente(String nome) {
-        for(Ingrediente ingrediente : listaIngredientes) {
-            if (ingrediente.getNome().equals(nome)) {
-                return true;
+    // Buscar ingrediente pelo nome
+    public static Ingrediente buscarIngrediente(String nome) {
+        for (Ingrediente ingrediente : listaIngredientes) {
+            if (ingrediente.getNome().equalsIgnoreCase(nome)) {
+                return ingrediente;
             }
         }
-
-        return false;
+        return null;
     }
 
+
+    // Exibir matriz de ingredientes
     public static void listarIngredientes() {
         if (listaIngredientes.isEmpty()) {
-            System.out.println("Nenhum ingrediente encontrado");
-        } else {
-            System.out.println("Lista de ingredientes cadastrados:");
+            System.out.println("Nenhum ingrediente encontrado.");
+            return;
+        }
 
-            for(Ingrediente ingrediente : listaIngredientes) {
-                ingrediente.exibirDados();
-                System.out.println("-----------------------");
+        System.out.println("\n📋 Lista de Ingredientes:");
+        System.out.println("------------------------------------------------------");
+        System.out.printf("| %-15s | %-10s | %-5s | %-12s |\n", "Nome", "Quantidade", "Unid", "Validade");
+        System.out.println("------------------------------------------------------");
+
+        for (Ingrediente ingrediente : listaIngredientes) {
+            ingrediente.exibirDados();
+        }
+        System.out.println("------------------------------------------------------");
+
+        verificarValidade();
+    }
+
+
+
+    // Verificar ingredientes próximos do vencimento
+    public static void verificarValidade() {
+        LocalDate hoje = LocalDate.now();
+        System.out.println("\n⚠ Ingredientes próximos da validade:");
+
+        boolean temVencimentos = false;
+        for (Ingrediente ingrediente : listaIngredientes) {
+            if (ingrediente.dataValidade.isBefore(hoje.plusDays(7))) {
+                System.out.println("⚠ " + ingrediente.nome + " vence em " + ingrediente.dataValidade.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                temVencimentos = true;
             }
         }
 
+        if (!temVencimentos) {
+            System.out.println("✅ Nenhum ingrediente próximo da validade!");
+        }
+    }
+
+
+    public Object formatarDataValidade() {
+        return DateTimeFormatter; formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 }
