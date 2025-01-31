@@ -12,6 +12,7 @@ public class FichaTecnica {
     private List<Ingrediente> ingredientes;
     private String modoPreparo;
     private int rendimento;
+    private String unidade;
 
     // Construtor
     public FichaTecnica() {
@@ -20,6 +21,7 @@ public class FichaTecnica {
         this.ingredientes = new ArrayList<>();
         this.modoPreparo = "";
         this.rendimento = 0;
+        this.unidade = "";
     }
 
     public FichaTecnica(String nomeProduto, String modoPreparo, int rendimento) {
@@ -28,6 +30,7 @@ public class FichaTecnica {
         this.ingredientes = new ArrayList<>();
         this.modoPreparo = modoPreparo;
         this.rendimento = rendimento;
+        this.unidade = unidade;
     }
 
     // Getters e Setters
@@ -65,6 +68,10 @@ public class FichaTecnica {
 
     public void adicionarIngrediente(Ingrediente ingrediente) {
         ingredientes.add(ingrediente);
+    }
+
+    public void getUnidade(String unidade) {
+        this.unidade = unidade;
     }
 
 }
