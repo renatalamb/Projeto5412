@@ -12,8 +12,8 @@ class Main {
 class Teste {
     // Construtor da classe Teste
     Teste() {
-        // Cria uma nova janela JFrame com o título "Teste"
-        JFrame jframe = new JFrame("Teste");
+        // Cria uma nova janela JFrame com o título "Login"
+        JFrame jframe = new JFrame("Login");
         jframe.setSize(800, 500); // Define o tamanho da janela
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Fecha o programa ao fechar a janela
         jframe.setResizable(false); // Impede que a janela seja redimensionada
