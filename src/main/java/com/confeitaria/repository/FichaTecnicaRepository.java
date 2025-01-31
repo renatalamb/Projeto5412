@@ -63,7 +63,7 @@ public class FichaTecnicaRepository {
                             String nome = dados[0];
                             double quantidade = Double.parseDouble(dados[1]);
                             String unidade = dados[2];
-                            ficha.adicionarIngrediente(new Ingrediente(nome, quantidade, unidade));
+                            ficha.adicionarIngrediente(nome, quantidade, unidade);
                         }
                     }
                 }
