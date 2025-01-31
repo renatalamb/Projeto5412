@@ -39,7 +39,8 @@ public class FichaTecnicaController {
             System.out.print("Unidade de Medida: ");
             String unidade = scanner.nextLine();
 
-            ficha.adicionarIngrediente(new Ingrediente(nomeIngrediente, quantidade, unidade));
+            ficha.adicionarIngrediente(nomeIngrediente, quantidade, unidade);
+            
         }
 
         System.out.print("Modo de Preparo: ");
