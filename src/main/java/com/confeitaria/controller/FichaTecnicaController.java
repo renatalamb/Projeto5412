@@ -39,7 +39,7 @@ public class FichaTecnicaController {
             System.out.print("Unidade de Medida: ");
             String unidade = scanner.nextLine();
 
-            ficha.adicionarIngrediente(nomeIngrediente, quantidade, unidade);
+            ficha.adicionarIngrediente(nomeIngrediente, (int) quantidade, unidade);
             
         }
 
@@ -52,7 +52,6 @@ public class FichaTecnicaController {
         scanner.nextLine(); // Consumir quebra de linha
 
         service.salvarFicha(ficha);
-        service.imprimirFicha(ficha);
     }
 
 }
