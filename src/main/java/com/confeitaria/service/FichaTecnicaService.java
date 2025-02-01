@@ -6,8 +6,6 @@ import main.java.com.confeitaria.model.Ingrediente;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class FichaTecnicaService {
     private static List<FichaTecnica> fichasTecnicas = new ArrayList<>();
 
@@ -27,13 +25,7 @@ public class FichaTecnicaService {
                 && ficha.getRendimento() > 0;
     }
 
-    public void imprimirFicha(FichaTecnica ficha) {
-        System.out.println("\nFicha Técnica: " + ficha.getNomeProduto());
-        System.out.println("Ingredientes:");
-        for (Ingrediente ingrediente : ficha.getIngredientes()) {
-            System.out.println("- " + ingrediente.getNome() + ": " + ingrediente.getQuantidade() + " " + ingrediente.getUnidadeMedida()); // Puxa de ingrediente, ver no codigo da mary
-        }
-        System.out.println("Modo de Preparo: " + ficha.getModoPreparo());
-        System.out.println("Rendimento: " + ficha.getRendimento());
+    public List<FichaTecnica> listarFichas() {
+        return fichasTecnicas;
     }
 }
