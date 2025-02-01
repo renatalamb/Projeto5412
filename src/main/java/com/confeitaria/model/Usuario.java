@@ -14,16 +14,16 @@ public class Usuario {
     private String cargo;
     private String morada;
     private String email;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private LocalDate data_de_nascimento;
     private double salario;
     private String telemovel;
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+
     //Cria TipoUsuario como um tipo de dado
-    public class CargoUsuario {
-        enum Cargo {
-            GERENTE, FUNCIONARIO
-        }
+    public enum Cargo {
+        GERENTE, FUNCIONARIO
     }
 
     // Lista para armazenar todas os usuarios criados
@@ -32,26 +32,26 @@ public class Usuario {
     // Construtor sem parâmetros
     public Usuario(){
         this.nome = "";
-        this.palPasse = "";
         this.cargo = "";
         this.morada = "";
         this.data_de_nascimento = null;
         this.salario = 0;
-        this.email = "";
         this.telemovel = "";
+        this.email = "";
+        this.palPasse = "";
     }
 
     // Contrutor com parâmetros
-    public Usuario(String nome, String palPasse, CargoUsuario Cargo, String morada,
-                   LocalDate data_de_nascimento, double salario, String email, String telemovel) {
+    public Usuario(String nome, Cargo cargo, String morada, LocalDate data_de_nascimento,
+                   double salario, String telemovel, String email, String palPasse) {
         this.nome = nome;
-        this.palPasse = palPasse;
-        this.cargo = cargo.toString();
+        this.cargo = cargo.name();
         this.morada = morada;
         this.data_de_nascimento = data_de_nascimento;
         this.salario = salario;
-        this.email = email;
         this.telemovel = telemovel;
+        this.email = email;
+        this.palPasse = palPasse;
     }
 
     // Métodos Get e Set
@@ -59,8 +59,8 @@ public class Usuario {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo.name();
     }
 
     public static List<Usuario> getUsuarios() {
@@ -111,21 +111,12 @@ public class Usuario {
         this.morada = morada;
     }
 
-    public DateTimeFormatter getFormatter() {
-        return formatter;
-    }
-
-    public void setFormatter(DateTimeFormatter formatter) {
-        this.formatter = formatter;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setDataDeNascimento(String data) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.data_de_nascimento = LocalDate.parse(data, formatter);
+        this.data_de_nascimento = LocalDate.parse(data, FORMATTER);
     }
 
     public LocalDate getDataDeNascimento() {
@@ -134,10 +125,6 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public LocalDate getData_de_nascimento() {
-        return data_de_nascimento;
     }
 
     public void setData_de_nascimento(LocalDate data_de_nascimento) {
