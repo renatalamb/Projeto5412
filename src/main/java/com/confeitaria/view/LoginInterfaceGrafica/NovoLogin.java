@@ -1,4 +1,4 @@
-package main.java.com.confeitaria.controller;
+package main.java.com.confeitaria.view.LoginInterfaceGrafica;
 
 import javax.swing.*;
 import java.awt.*;
