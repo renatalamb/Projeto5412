@@ -13,28 +13,22 @@ public class Login {
     public Login() {
     // Inicia o HashMap com dados dos usuarios cadastrados
         carregarUsuariosNoMap();
-        sc = new Scanner(System.in);
     }
 
     public void carregarUsuariosNoMap() {
-        for (Usuario usuario : Usuario.getUsuarios()) {
-            usuarios.put(usuario.obterEmail(), usuario.obterPalPasse());
-        }
+        //ler do arquivo csv
     }
+
+    public void criarUsuario() {
+
+    }
+
+
+
 
     //Lê dados do usuário para login
     public void fazerLogin() {
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-        System.out.print("Palavra passe: ");
-        String palPasse = sc.nextLine();
-
-        //Verifica credencias para efetuar login
-        if (usuarios.containsKey(email) && usuarios.get(email).equals(palPasse)) {
-            System.out.println("Login efetuado com sucesso!");
-        } else {
-            System.out.println("Usuário ou senha inválidos.");
-        }
+        if ()
     }
 
     //private boolean estaLogado = false;
