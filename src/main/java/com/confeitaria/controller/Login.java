@@ -1,87 +1,86 @@
 package main.java.com.confeitaria.controller;
-import main.java.com.confeitaria.model.Usuario;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+
+import main.java.com.confeitaria.model.Usuario;
+
 public class Login {
-    private Map<String, String> usuarios = new HashMap<>();
-    private Scanner sc;
+    private static final  String LOGIN_CSV = "src/main/java/com/confeitaria/data/dadosLogin.csv"; // Endereço do arquivo csv
+    private Map<String, String> dadosLogin = new HashMap<>();
 
 
-    // Construtor
+    // Construtor: carrega os usuários do CSV ao iniciar
     public Login() {
-    // Inicia o HashMap com dados dos usuarios cadastrados
-        carregarUsuariosNoMap();
+        carregarDadosLoginDoCSV();
     }
 
-    public void carregarUsuariosNoMap() {
-        //ler do arquivo csv
-    }
+    // Lê os dados do Login armazenados no CSV (email e senha) e salva no HashMap
+    public void carregarDadosLoginDoCSV() {
+        try {
+            File arquivo = new File(LOGIN_CSV);
+            if (!arquivo.exists()) {
+                arquivo.getParentFile().mkdirs();
+                arquivo.createNewFile();
+            }
 
-    public void criarUsuario() {
-
-    }
-
-
-
-
-    //Lê dados do usuário para login
-    public void fazerLogin() {
-        if ()
-    }
-
-    //private boolean estaLogado = false;
-
-
-
-    // Adiciona novos usuários com validação
-    public void verificaUsuarioExiste (String email, String palPasse) {
-        if (usuarios.containsKey(email)) {
-            System.out.println("Erro: Email já cadastrado!");
-        } else {
-            usuarios.put(email, palPasse);
-            System.out.println("Usuário adicionado com sucesso!");
+            // Lê arquivo CSV
+            try (BufferedReader reader = Files.newBufferedReader(Paths.get(LOGIN_CSV))) {
+                String linha;
+                reader.readLine(); // Ignora cabeçalho
+                while ((linha = reader.readLine()) != null) {
+                    String[] dados = linha.split(";");
+                    if (dados.length >= 2) {
+                        dadosLogin.put(dados[0].trim(), dados[1].trim());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar dados de login: " + e.getMessage());
         }
     }
 
 
-    // Menu principal
-    public void menu() {
-        int opcao = 0;
-        do {
-            System.out.println("\n===== Menu =====");
-            System.out.println("1. Registar funcionário");
-            System.out.println("2. Fazer Login");
-            System.out.println("3. Sair");
-            System.out.print("Escolha uma opção: ");
-            //opcao = sc.nextInt();
-            //sc.nextLine(); // Limpar o buffer do teclado
+    // Verifica se o usuário já existe
+    public boolean usuarioExiste(String email) {
+        return dadosLogin.containsKey(email);
+    }
 
-            String input = sc.nextLine();
+    // Método para autenticar login
+    public boolean fazerLogin(String email, String senha) {
+        return dadosLogin.containsKey(email) && dadosLogin.get(email).equals(senha);
+    }
 
-            try {
-                opcao = Integer.parseInt(input); // Converte para inteiro
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Tente novamente.");
-                continue;
-            }
+    // Adiciona novo usuário ao HashMap e salva no CSV
+    public boolean registrarUsuario(String email,String palPasse) {
+        if (usuarioExiste(email)) {
+            return false; // Já existe, não pode registrar novamente
+        } else {
+            dadosLogin.put(email, palPasse);
+            salvarDadosLoginNoCSV(email, palPasse);
+            System.out.println("Usuário cadastrado com sucesso.");
+            return true; // Usuário cadastrado com sucesso
+        }
+    }
 
-            switch (opcao) {
-                case 1:
-                    Usuario.criarUsuario(); //Chama metodo de criação de usuario
-                    carregarUsuariosNoMap();
-                    break;
-                case 2:
-                    fazerLogin();
-                    break;
-                case 3:
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        } while (opcao != 3);
+
+    // Salva novo usuário no CSV
+    private void salvarDadosLoginNoCSV(String email, String senha) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOGIN_CSV, true))) {
+            writer.write(email + ";" + senha);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar usuário: " + e.getMessage());
+        }
+    }
+
+
+    // Obtém todos os usuários cadastrados (somente email para segurança)
+    public Map<String, String> listarUsuarios() {
+        return new HashMap<>(dadosLogin);
     }
 
 }
