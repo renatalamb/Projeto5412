@@ -1,6 +1,5 @@
 package main.java.com.confeitaria.repository;
 
-import main.java.com.confeitaria.model.Categoria;
 import main.java.com.confeitaria.model.ProdutoFinal;
 import java.io.*;
 import java.nio.file.*;
@@ -21,7 +20,6 @@ public class ProdutoFinalRepository {
             for (ProdutoFinal produto : produtos) {
                 writer.write(String.format("%s,%s,%s,%d,%d\n",
                         produto.getNome(),
-                        produto.getCategoria().getNome(),
                         produto.getDataProducao(),
                         produto.getQtdEstoque(),
                         produto.getQtdMinima()));
@@ -40,9 +38,8 @@ public class ProdutoFinalRepository {
             reader.readLine(); // Pula o cabeçalho
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                ProdutoFinal produto = new ProdutoFinal(dados[0], Integer.parseInt(dados[1]), Integer.parseInt(dados[2]), new Categoria(dados[3]));
+                ProdutoFinal produto = new ProdutoFinal(dados[0], Integer.parseInt(dados[1]), Integer.parseInt(dados[2]));
                 produto.setNome(dados[0]);
-                produto.setCategoria(new Categoria(dados[1])); // Ajuste conforme necessário
                 produto.setDataProducao(LocalDate.parse(dados[2]));
                 produto.setQtdEstoque(Integer.parseInt(dados[3]));
                 produto.setQtdMinima(Integer.parseInt(dados[4]));

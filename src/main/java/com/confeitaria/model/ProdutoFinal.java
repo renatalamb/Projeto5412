@@ -15,16 +15,15 @@ public class ProdutoFinal implements Serializable {
     private LocalDate dataProducao;
     private int qtdEstoque; //Quantidade atual no estoque
     private int qtdMinima; //Quantidade mínima permitida no estoque
-    private Categoria categoria; //Relacionamento com a classe Categoria
     // Lista para armazenar o histórico de movimentações de estoque
     private List<String> historicoMovimentacoes;
 
     //Construtor
-    public ProdutoFinal(String nome, int qtdEstoque, int qtdMinima, Categoria categoria) {
+    public ProdutoFinal(String nome, int qtdEstoque, int qtdMinima) {
         this.nome = nome;
         this.qtdEstoque = qtdEstoque;
         this.qtdMinima = qtdMinima;
-        this.categoria = categoria; //Atribui a categoria ao produto
+
         this.historicoMovimentacoes = new ArrayList<>(); // Inicializa o histórico como uma lista vazia
     }
 
@@ -61,14 +60,6 @@ public class ProdutoFinal implements Serializable {
 
     public void setQtdMinima(int qtdMinima) {
         this.qtdMinima = qtdMinima;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 
     public <E> List<E> getHistoricoMovimentacoes() {

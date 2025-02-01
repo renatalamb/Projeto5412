@@ -57,7 +57,6 @@ public class ProdutoFinalService {
         // Exibe msg de confirmação com a data de produção
         System.out.println("\nProduto registrado com sucesso!");
         System.out.println("Nome do produto: " + produto.getNome());
-        System.out.println("Categoria: " + produto.getCategoria().getNome());
         System.out.println("Data de produção: " + produto.getDataProducao());
     }
 
@@ -79,7 +78,6 @@ public class ProdutoFinalService {
     public static void exibirDados(ProdutoFinal produto) {
         System.out.println("Dados deste produto final: ");
         System.out.println("Nome: " + produto.getNome());
-        System.out.println("Categoria " + produto.getCategoria().getNome());
         System.out.println("Data de producao: " + produto.getDataProducao());
         System.out.println("Quantidade em estoque: " + produto.getQtdEstoque());
         System.out.println("Quantidade: " + produto.getQtdMinima());
