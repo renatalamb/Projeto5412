@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.List;
 
 public class RegistoFichaTecnica {
     private JFrame frame;
@@ -76,6 +78,9 @@ public class RegistoFichaTecnica {
             }
         });
 
+        // Carregar as fichas técnicas do arquivo CSV ao iniciar
+        carregarFichasCSV();
+
         frame.setVisible(true);
     }
 
@@ -117,6 +122,14 @@ public class RegistoFichaTecnica {
         txtRendimento.setText("");
         ingredienteListModel.clear();
         fichaAtual = null;
+    }
+
+    // Método para carregar as fichas técnicas do arquivo CSV
+    private void carregarFichasCSV() {
+        List<FichaTecnica> fichas = fichaService.carregarFichas();
+        for (FichaTecnica ficha : fichas) {
+            JOptionPane.showMessageDialog(frame, "Ficha Técnica carregada: " + ficha.getNomeProduto());
+        }
     }
 
     public static void main(String[] args) {
