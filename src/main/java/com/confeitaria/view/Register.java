@@ -1,34 +1,35 @@
 package main.java.com.confeitaria.view;
 
+import main.java.com.confeitaria.model.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Register extends JFrame {
 
-    // Declaração dos componentes da interface gráfica
-    private JButton registerButton;
-    private JTextField tf_Nome;
-    private JTextField tf_Email;
-    private JTextField tf_Data_de_Nascimento;
-    private JTextField tf_Morada;
-    private JTextField tf_Telemovel;
+    private JButton registerButton, exportButton;
+    private JTextField tf_Nome, tf_Email, tf_Data_de_Nascimento, tf_Morada, tf_Telemovel;
     private JPasswordField pf_Password;
     private JProgressBar progressBar1;
+    private static final String FILE_NAME = "usuarios.csv";
+    private static List<Usuario> usuarios = new ArrayList<>();
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    // Construtor para criar a interface
     public Register() {
         setTitle("Cadastro de Usuário");
-        setSize(400, 300);
+        setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Centraliza a tela
+        setLocationRelativeTo(null);
 
-        // Criar e configurar os componentes
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(8, 2)); // Grid com 8 linhas e 2 colunas
+        panel.setLayout(new GridLayout(9, 2));
 
-        // Inicializar os campos
         tf_Nome = new JTextField();
         tf_Email = new JTextField();
         tf_Data_de_Nascimento = new JTextField();
@@ -36,49 +37,35 @@ public class Register extends JFrame {
         tf_Telemovel = new JTextField();
         pf_Password = new JPasswordField();
         registerButton = new JButton("Registrar");
+        exportButton = new JButton("Exportar CSV");
         progressBar1 = new JProgressBar();
-
         progressBar1.setIndeterminate(true);
-        progressBar1.setVisible(false); // Inicialmente escondida
+        progressBar1.setVisible(false);
 
-        // Criar labels
-        JLabel lblNome = new JLabel("Nome:");
-        JLabel lblEmail = new JLabel("Email:");
-        JLabel lblDataNascimento = new JLabel("Data de Nascimento:");
-        JLabel lblMorada = new JLabel("Morada:");
-        JLabel lblTelemovel = new JLabel("Telemóvel:");
-        JLabel lblPassword = new JLabel("Senha:");
-
-        // Adicionar os componentes ao painel
-        panel.add(lblNome);
+        panel.add(new JLabel("Nome:"));
         panel.add(tf_Nome);
-        panel.add(lblEmail);
+        panel.add(new JLabel("Email:"));
         panel.add(tf_Email);
-        panel.add(lblDataNascimento);
+        panel.add(new JLabel("Data de Nascimento (dd/MM/yyyy):"));
         panel.add(tf_Data_de_Nascimento);
-        panel.add(lblMorada);
+        panel.add(new JLabel("Morada:"));
         panel.add(tf_Morada);
-        panel.add(lblTelemovel);
+        panel.add(new JLabel("Telemóvel:"));
         panel.add(tf_Telemovel);
-        panel.add(lblPassword);
+        panel.add(new JLabel("Senha:"));
         panel.add(pf_Password);
         panel.add(registerButton);
+        panel.add(exportButton);
         panel.add(progressBar1);
 
-        add(panel); // Adiciona o painel ao JFrame
+        add(panel);
 
-        // Ação do botão de registro
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarUsuario();
-            }
-        });
+        registerButton.addActionListener(e -> cadastrarUsuario());
+        exportButton.addActionListener(e -> exportarCSV());
 
         setVisible(true);
     }
 
-    // Método para cadastrar o usuário
     private void cadastrarUsuario() {
         String nome = tf_Nome.getText();
         String email = tf_Email.getText();
@@ -87,24 +74,48 @@ public class Register extends JFrame {
         String telemovel = tf_Telemovel.getText();
         String senha = new String(pf_Password.getPassword());
 
-        // Verifica se todos os campos estão preenchidos
         if (nome.isEmpty() || email.isEmpty() || dataNascimento.isEmpty() || morada.isEmpty() || telemovel.isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
-        } else {
-            // Simula um cadastro bem-sucedido
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Nome: " + nome);
-            System.out.println("Email: " + email);
-            System.out.println("Data de Nascimento: " + dataNascimento);
-            System.out.println("Morada: " + morada);
-            System.out.println("Telemóvel: " + telemovel);
-            System.out.println("Senha: " + senha);
+            return;
+        }
+
+        try {
+            LocalDate dataFormatada = LocalDate.parse(dataNascimento, FORMATTER);
+            Usuario usuario = new Usuario(nome, Usuario.Cargo.FUNCIONARIO, morada, dataFormatada, 0, telemovel, email, senha);
+            usuarios.add(usuario);
+
+            try (FileWriter fw = new FileWriter(FILE_NAME, true); PrintWriter pw = new PrintWriter(fw)) {
+                pw.println(nome + "," + email + "," + dataNascimento + "," + morada + "," + telemovel + "," + senha);
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (DateTimeParseException ex) {
+            JOptionPane.showMessageDialog(this, "Formato de data inválido! Use dd/MM/yyyy.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    // Método principal para executar o programa
+    private void exportarCSV() {
+        new Thread(() -> {
+            exportButton.setEnabled(false);
+            progressBar1.setVisible(true);
+
+            try (FileWriter fw = new FileWriter(FILE_NAME); PrintWriter pw = new PrintWriter(fw)) {
+                pw.println("Nome,Email,Data de Nascimento,Morada,Telemóvel,Senha");
+                for (Usuario usuario : usuarios) {
+                    pw.println(usuario.getNome() + "," + usuario.getEmail() + "," + usuario.getDataDeNascimento().format(FORMATTER) + "," + usuario.getMorada() + "," + usuario.getTelemovel() + "," + usuario.getPalPasse());
+                }
+                JOptionPane.showMessageDialog(this, "Dados exportados com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Erro ao exportar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+            progressBar1.setVisible(false);
+            exportButton.setEnabled(true);
+        }).start();
+    }
+
     public static void main(String[] args) {
         new Register();
     }
 }
-

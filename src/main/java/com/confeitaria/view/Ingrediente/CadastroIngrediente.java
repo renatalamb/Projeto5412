@@ -22,7 +22,7 @@ public class CadastroIngrediente {
     private JTable tabelaIngredientes;
 
     // Cores personalizadas para sua marca (azul bebê e rosa pastel)
-    private Color corFundo = new Color(245, 245, 245);  // Cor de fundo clara (cinza claro)
+    private Color corFundo = new Color(252, 231, 231);  // Cor de fundo clara (cinza claro)
     private Color corPrimaria = new Color(173, 216, 230); // Azul bebê (exemplo)
     private Color corSecundaria = new Color(255, 182, 193); // Rosa pastel (exemplo)
 
