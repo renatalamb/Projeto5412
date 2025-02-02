@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Ingrediente {
     private String nome;
@@ -28,6 +27,9 @@ public class Ingrediente {
         this.quantMinima = quantMinima;
         this.dataValidade = dataValidade;
     }
+    // Samara implementou para testar ficha tecnica, se nao de certo tirar
+    public Ingrediente(String nome, Double quantidade, String unidade) {
+    }
 
 
     public void exibirDados() {
@@ -37,6 +39,10 @@ public class Ingrediente {
         System.out.println("QuantMinima: " + this.quantMinima);
         System.out.println("Data de Validade: " + this.dataValidade.format(this.formatter));
     }
+
+
+
+
 
 
     public String getNome() {
