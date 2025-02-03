@@ -1,7 +1,6 @@
-package main.java.com.confeitaria.view.LoginInterfaceGrafica;
+package main.java.com.confeitaria.view;
 
 import main.java.com.confeitaria.controller.Login;
-import main.java.com.confeitaria.view.LoginInterfaceGrafica.TelaPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,6 +74,7 @@ public class LoginRegister extends JFrame {
             JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    /*
     // Esse método regista usuario e e exibe mensagens de erro, sucesso ou úsuario já existe
     private void registrarUsuario() {
         String usuario = campoUsuario.getText();
@@ -91,6 +91,13 @@ public class LoginRegister extends JFrame {
             JOptionPane.showMessageDialog(this, "Usuário já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+     */
+
+        private void registrarUsuario() {
+            dispose(); // Fecha a janela de login
+            new Register(); // Abre a tela de registro
+        }
+
         // Esse método fecha a tela de login e abre a tela principal do sistema
     private void abrirTelaPrincipal() {
         dispose(); // Fecha a tela de login
