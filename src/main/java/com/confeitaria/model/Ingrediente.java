@@ -27,6 +27,7 @@ public class Ingrediente {
         this.quantMinima = quantMinima;
         this.dataValidade = dataValidade;
     }
+
     // Samara implementou para testar ficha tecnica, se nao de certo tirar
     public Ingrediente(String nome, Double quantidade, String unidade) {
     }
@@ -41,10 +42,6 @@ public class Ingrediente {
     }
 
 
-
-
-
-
     public String getNome() {
         return this.nome;
     }
@@ -57,7 +54,7 @@ public class Ingrediente {
         return this.unidadeMedida;
     }
 
-    public int getQuantMinima(int quantidade) {
+    public int getQuantMinima() {
         return this.quantMinima;
     }
 
@@ -71,4 +68,10 @@ public class Ingrediente {
         return dataValidade != null ? dataValidade.format(formatter) : "Sem validade";
     }
 
+    public void adicionarQuantidade(int quantidade) {
+    }
+
+    public String getDataValidade() {
+        return "";
+    }
 }
