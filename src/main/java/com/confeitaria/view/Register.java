@@ -1,6 +1,7 @@
 package main.java.com.confeitaria.view;
 
 import main.java.com.confeitaria.model.Usuario;
+import main.java.com.confeitaria.controller.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +19,10 @@ public class Register extends JFrame {
     private JPasswordField pf_Password;
     private JProgressBar progressBar1;
     private static final String FILE_NAME = "usuarios.csv";
+    private static final String LOGIN_FILE = "src/main/java/com/confeitaria/data/dadosLogin.csv";
     private static List<Usuario> usuarios = new ArrayList<>();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private Login loginController = new Login();
 
     public Register() {
         setTitle("Cadastro de Usuário");
@@ -60,6 +63,7 @@ public class Register extends JFrame {
 
         registerButton.addActionListener(e -> cadastrarUsuario());
 
+        carregarUsuariosCSV();
         setVisible(true);
     }
 
@@ -82,6 +86,7 @@ public class Register extends JFrame {
             usuarios.add(usuario);
 
             salvarUsuariosCSV();
+            salvarDadosLoginCSV(email, senha);
             JOptionPane.showMessageDialog(this, "Cadastro realizado e salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             abrirTelaLogin();
         } catch (DateTimeParseException ex) {
@@ -100,6 +105,38 @@ public class Register extends JFrame {
         }
     }
 
+    private void salvarDadosLoginCSV(String email, String senha) throws IOException {
+        try (FileWriter fw = new FileWriter(LOGIN_FILE, true); PrintWriter pw = new PrintWriter(fw)) {
+            pw.println(email + ";" + senha);
+        }
+        loginController.registrarUsuario(email, senha);
+    }
+
+    private void carregarUsuariosCSV() {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+            String linha;
+            br.readLine(); // Ignorar cabeçalho
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length >= 6) {
+                    Usuario usuario = new Usuario(
+                            dados[0],
+                            Usuario.Cargo.FUNCIONARIO,
+                            dados[3],
+                            LocalDate.parse(dados[2], FORMATTER),
+                            0,
+                            dados[4],
+                            dados[1],
+                            dados[5]
+                    );
+                    usuarios.add(usuario);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar usuários: " + e.getMessage());
+        }
+    }
+
     private void abrirTelaLogin() {
         dispose(); // Fecha a tela de registro
         new LoginRegister(); // Abre a tela de login
@@ -109,5 +146,4 @@ public class Register extends JFrame {
         new Register();
     }
 }
-
 
