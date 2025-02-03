@@ -1,4 +1,4 @@
-package main.java.com.confeitaria.view.Ingrediente;
+package main.java.com.confeitaria.view;
 
 import main.java.com.confeitaria.controller.IngredienteController;
 

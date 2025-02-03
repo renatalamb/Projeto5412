@@ -1,4 +1,4 @@
-package main.java.com.confeitaria.view.LoginInterfaceGrafica;
+package main.java.com.confeitaria.view;
 
 
 import main.java.com.confeitaria.model.ProdutoFinal;
