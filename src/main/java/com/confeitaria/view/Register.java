@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Register extends JFrame {
 
-    private JButton registerButton, exportButton;
+    private JButton registerButton;
     private JTextField tf_Nome, tf_Email, tf_Data_de_Nascimento, tf_Morada, tf_Telemovel;
     private JPasswordField pf_Password;
     private JProgressBar progressBar1;
@@ -28,7 +28,7 @@ public class Register extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(9, 2));
+        panel.setLayout(new GridLayout(8, 2));
 
         tf_Nome = new JTextField();
         tf_Email = new JTextField();
@@ -37,7 +37,6 @@ public class Register extends JFrame {
         tf_Telemovel = new JTextField();
         pf_Password = new JPasswordField();
         registerButton = new JButton("Registrar");
-        exportButton = new JButton("Exportar CSV");
         progressBar1 = new JProgressBar();
         progressBar1.setIndeterminate(true);
         progressBar1.setVisible(false);
@@ -55,13 +54,11 @@ public class Register extends JFrame {
         panel.add(new JLabel("Senha:"));
         panel.add(pf_Password);
         panel.add(registerButton);
-        panel.add(exportButton);
         panel.add(progressBar1);
 
         add(panel);
 
         registerButton.addActionListener(e -> cadastrarUsuario());
-        exportButton.addActionListener(e -> exportarCSV());
 
         setVisible(true);
     }
@@ -84,10 +81,9 @@ public class Register extends JFrame {
             Usuario usuario = new Usuario(nome, Usuario.Cargo.FUNCIONARIO, morada, dataFormatada, 0, telemovel, email, senha);
             usuarios.add(usuario);
 
-            try (FileWriter fw = new FileWriter(FILE_NAME, true); PrintWriter pw = new PrintWriter(fw)) {
-                pw.println(nome + "," + email + "," + dataNascimento + "," + morada + "," + telemovel + "," + senha);
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }
+            salvarUsuariosCSV();
+            JOptionPane.showMessageDialog(this, "Cadastro realizado e salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            abrirTelaLogin();
         } catch (DateTimeParseException ex) {
             JOptionPane.showMessageDialog(this, "Formato de data inválido! Use dd/MM/yyyy.", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
@@ -95,27 +91,23 @@ public class Register extends JFrame {
         }
     }
 
-    private void exportarCSV() {
-        new Thread(() -> {
-            exportButton.setEnabled(false);
-            progressBar1.setVisible(true);
-
-            try (FileWriter fw = new FileWriter(FILE_NAME); PrintWriter pw = new PrintWriter(fw)) {
-                pw.println("Nome,Email,Data de Nascimento,Morada,Telemóvel,Senha");
-                for (Usuario usuario : usuarios) {
-                    pw.println(usuario.getNome() + "," + usuario.getEmail() + "," + usuario.getDataDeNascimento().format(FORMATTER) + "," + usuario.getMorada() + "," + usuario.getTelemovel() + "," + usuario.getPalPasse());
-                }
-                JOptionPane.showMessageDialog(this, "Dados exportados com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Erro ao exportar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
+    private void salvarUsuariosCSV() throws IOException {
+        try (FileWriter fw = new FileWriter(FILE_NAME); PrintWriter pw = new PrintWriter(fw)) {
+            pw.println("Nome,Email,Data de Nascimento,Morada,Telemóvel,Senha");
+            for (Usuario usuario : usuarios) {
+                pw.println(usuario.getNome() + "," + usuario.getEmail() + "," + usuario.getDataDeNascimento().format(FORMATTER) + "," + usuario.getMorada() + "," + usuario.getTelemovel() + "," + usuario.getPalPasse());
             }
+        }
+    }
 
-            progressBar1.setVisible(false);
-            exportButton.setEnabled(true);
-        }).start();
+    private void abrirTelaLogin() {
+        dispose(); // Fecha a tela de registro
+        new LoginRegister(); // Abre a tela de login
     }
 
     public static void main(String[] args) {
         new Register();
     }
 }
+
+
