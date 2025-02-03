@@ -74,6 +74,7 @@ public class LoginRegister extends JFrame {
             JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     /*
     // Esse método regista usuario e e exibe mensagens de erro, sucesso ou úsuario já existe
     private void registrarUsuario() {
@@ -91,12 +92,15 @@ public class LoginRegister extends JFrame {
             JOptionPane.showMessageDialog(this, "Usuário já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
      */
+
 
         private void registrarUsuario() {
             dispose(); // Fecha a janela de login
             new Register(); // Abre a tela de registro
         }
+
 
         // Esse método fecha a tela de login e abre a tela principal do sistema
     private void abrirTelaPrincipal() {
