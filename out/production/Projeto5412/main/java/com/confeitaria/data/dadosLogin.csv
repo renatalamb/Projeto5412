@@ -1,7 +1,12 @@
 gust@email.com;1234
 gust@email.com;1234
 mary@email.com;1234
+<<<<<<< Register
 samara1234@gmail.com;123456
 samara1234@gmail.com;123456
 renara1234@gmail.com;1234
 renara1234@gmail.com;1234
+=======
+samara@gmail.com;123456
+samara@gmail.com;123456
+>>>>>>> local
