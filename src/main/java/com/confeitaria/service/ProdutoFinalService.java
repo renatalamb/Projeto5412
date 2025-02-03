@@ -2,7 +2,6 @@ package main.java.com.confeitaria.service;
 
 import main.java.com.confeitaria.model.ProdutoFinal;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,58 +10,69 @@ import java.util.List;
 public class ProdutoFinalService {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private List<ProdutoFinal> produtos;
 
-    // Método para atualizar a quantidade em estoque e verificar o limite mínimo
-    public void atualizarEstoque(ProdutoFinal produto, int quantidade) {
+    // Construtor
+    public ProdutoFinalService() {
+        produtos = new ArrayList<>();
+    }
+
+    // Adiciona um novo produto à lista
+    public void adicionarProduto(ProdutoFinal produto) {
+        produtos.add(produto);
+    }
+
+    // Busca um produto pelo nome
+    public ProdutoFinal buscarProdutoPorNome(String nome) {
+        for (ProdutoFinal produto : produtos) {
+            if (produto.getNome().equalsIgnoreCase(nome)) {
+                return produto;
+            }
+        }
+        return null; // Caso não encontre
+    }
+
+    // Atualiza o estoque de um produto
+    public boolean atualizarEstoque(ProdutoFinal produto, int quantidade, boolean flag) {
         if (quantidade > 0) {
             produto.setQtdEstoque(produto.getQtdEstoque() + quantidade); // Adiciona ao estoque
             registrarMovimentacao(produto, quantidade, "Entrada");
-            System.out.println("Estoque atualizado: " + produto.getQtdEstoque());
             verificarLimiteMinimo(produto);
         } else {
             System.out.println("Erro: A quantidade deve ser maior que zero.");
         }
+        return flag;
     }
 
-    // Método para registrar a saída do estoque (venda)
+    // Registra uma venda de um produto
     public void registrarVenda(ProdutoFinal produto, int quantidadeVendida) {
         if (quantidadeVendida > 0 && quantidadeVendida <= produto.getQtdEstoque()) {
             produto.setQtdEstoque(produto.getQtdEstoque() - quantidadeVendida);
             registrarMovimentacao(produto, quantidadeVendida, "Saída");
-            System.out.println("Venda realizada com sucesso! Estoque restante: " + produto.getQtdEstoque());
             verificarLimiteMinimo(produto);
         } else {
             System.out.println("Erro: Quantidade inválida ou insuficiente.");
         }
     }
 
-    // Método para verificar se o estoque está abaixo ou igual ao limite mínimo
+    // Verifica se o estoque do produto está abaixo do mínimo
     private void verificarLimiteMinimo(ProdutoFinal produto) {
         if (produto.getQtdEstoque() < produto.getQtdMinima()) {
             System.out.println("Atenção: Estoque do produto '" + produto.getNome() + "' abaixo do mínimo!");
         }
     }
 
-    // Método para registrar uma movimentação no histórico
+    // Registra uma movimentação (entrada ou saída)
     private void registrarMovimentacao(ProdutoFinal produto, int quantidade, String tipo) {
         if (produto.getHistoricoMovimentacoes() == null) {
-            produto.setHistoricoMovimentacoes(new ArrayList<>()); // Garante lista não nula
+            produto.setHistoricoMovimentacoes(new ArrayList<>());
         }
         String registro = "Tipo: " + tipo + " | Quantidade: " + quantidade + " | Data/Hora: " + LocalDateTime.now();
         produto.getHistoricoMovimentacoes().add(registro);
     }
 
-    // Método para lançar o produto no sistema (registra a data de produção)
-    public void lancarProdutoNoSistema(ProdutoFinal produto) {
-        produto.setDataProducao(LocalDate.now());
-        System.out.println("\nProduto registrado com sucesso!");
-        System.out.println("Nome do produto: " + produto.getNome());
-        System.out.println("Data de produção: " + produto.getDataProducao());
-    }
-
-    // Método para exibir o histórico de movimentações
+    // Exibe o histórico de movimentações de um produto
     public void exibirHistoricoMovimentacoes(ProdutoFinal produto) {
-        System.out.println("\nHistórico de movimentações de estoque:");
         List<String> historico = produto.getHistoricoMovimentacoes();
         if (historico == null || historico.isEmpty()) {
             System.out.println("Nenhuma movimentação registrada.");
@@ -73,12 +83,10 @@ public class ProdutoFinalService {
         }
     }
 
-    // Método para exibir os dados do produto
-    public void exibirDados(ProdutoFinal produto) {
-        System.out.println("\nDados do produto:");
-        System.out.println("Nome: " + produto.getNome());
-        System.out.println("Data de produção: " + produto.getDataProducao());
-        System.out.println("Quantidade em estoque: " + produto.getQtdEstoque());
-        System.out.println("Quantidade mínima: " + produto.getQtdMinima());
+    // Exibe os dados de um produto
+    public void exibirProduto(ProdutoFinal produto) {
+        System.out.println("Produto: " + produto.getNome());
+        System.out.println("Estoque: " + produto.getQtdEstoque());
+        System.out.println("Mínimo: " + produto.getQtdMinima());
     }
 }

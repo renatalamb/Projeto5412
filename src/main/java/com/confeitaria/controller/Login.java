@@ -83,6 +83,8 @@ public class Login {
         return new HashMap<>(dadosLogin);
     }
 
+    public void menu() {
+    }
 }
 
 

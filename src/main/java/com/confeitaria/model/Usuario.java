@@ -130,4 +130,5 @@ public class Usuario {
     public void setData_de_nascimento(LocalDate data_de_nascimento) {
         this.data_de_nascimento = data_de_nascimento;
     }
-}
+    }
+
