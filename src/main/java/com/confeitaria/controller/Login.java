@@ -76,7 +76,11 @@ public class Login {
             System.out.println("Erro ao salvar usuário: " + e.getMessage());
         }
     }
+     // Testando
+     public boolean autenticarUsuario(String usuario, String senha) {
+         return fazerLogin(usuario, senha);
 
+     }
 
     // Obtém todos os usuários cadastrados (somente email para segurança)
     public Map<String, String> listarUsuarios() {
