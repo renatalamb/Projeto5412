@@ -94,4 +94,6 @@ public class LoginRegister extends JFrame {
     public static void main(String[] args) {
         new LoginRegister();
     }
+
+
 }

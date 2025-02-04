@@ -1,6 +1,6 @@
 package main.java.com.confeitaria.view;
 
-import main.java.com.confeitaria.view.IngredienteInterface;
+import main.java.com.confeitaria.view.IngredienteGUI;
 import main.java.com.confeitaria.view.ProdutoFinalGUI;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class MenuGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Fecha a janela atual
-                new IngredienteInterface().setVisible(true);
+                new IngredienteGUI().setVisible(true);
             }
         });
 

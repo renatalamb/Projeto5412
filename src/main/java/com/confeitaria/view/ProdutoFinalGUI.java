@@ -8,6 +8,8 @@ import main.java.com.confeitaria.service.ProdutoFinalService;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ProdutoFinalGUI extends JFrame {
@@ -19,6 +21,7 @@ public class ProdutoFinalGUI extends JFrame {
     private JTextArea historicoArea;
     private JTable tabelaProduto;
     private DefaultTableModel tabelaModelo;
+    private MenuGUI menuGUI;
 
     public ProdutoFinalGUI() {
         produtoService = new ProdutoFinalService();
@@ -154,6 +157,33 @@ public class ProdutoFinalGUI extends JFrame {
         for (ProdutoFinal produto : produtos) {
             tabelaModelo.addRow(new Object[]{produto.getNome(), produto.getQtdEstoque(), produto.getQtdMinima()});
         }
+    }
+    // Testando
+    public ProdutoFinalGUI(MenuGUI menuGUI) {
+        this.menuGUI = menuGUI;
+        setTitle("Cadastro de Produto Final");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JLabel label = new JLabel("Cadastro de Produto Final", SwingConstants.CENTER);
+        JButton btnVoltar = new JButton("Voltar");
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha a tela atual
+                menuGUI.setVisible(true); // Volta ao MenuGUI
+            }
+        });
+
+        panel.add(label, BorderLayout.CENTER);
+        panel.add(btnVoltar, BorderLayout.SOUTH);
+
+        add(panel);
     }
 
     public static void main(String[] args) {
