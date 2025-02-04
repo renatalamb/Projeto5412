@@ -1,7 +1,4 @@
-# Projeto5412
-Projeto UFCD 5412 - Programação Estruturada
-
-Um parágrafo da descrição do projeto vai aqui
+# Projeto5412 - Gestão de uma confeitaria
 
 🚀 Começando
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
@@ -9,7 +6,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 Consulte Implantação para saber como implantar o projeto.
 
 📋 Pré-requisitos
-
+Um computador com uma boa capacidade de Ram, Git ou a aplicação do Github,IntelliJ IDEA, plugin de Gui designer.
 
 Exemplos:
 
@@ -46,26 +43,26 @@ Explique que eles verificam esses testes e porquê.
 Dar exemplos
 ⌨️ E testes de estilo de codificação
 Explique que eles verificam esses testes e porquê.
-
+__________________________________________
 Dar exemplos
-📦 Implantação
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+📦 Implantação:
+
+Intellij - Ferramenta de codigo (https://www.jetbrains.com/idea/)
+
+Gui Designer - Ferramenta de interface graphica
+(https://www.jetbrains.com/help/idea/design-gui-using-swing.html)
 __________________________________________
 🛠️ Construído com:
 IntelliJ IDEA(Community edition V.231.8109.175)
 
-Formato: Java.
+Formato: Java
 __________________________________________
-
-Dropwizard - O framework web usado
-Maven - Gerente de Dependência
-ROME - Usada para gerar RSS
-
-🖇️ Colaborando
-Por favor, leia o COLABORACAO.md para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+🖇️ Membros do Projecto
+Renata,Mariana,Samara,Daniel
+__________________________________________
 
 📌 Versão
 Nós usamos SemVer para controle de versão. Para as versões disponíveis, observe as tags neste repositório.
 
-✒️ Autores
-Renata,Samara,Mariana,Daniel
+✒️ Autor do Read.me
+Daniel Mack
