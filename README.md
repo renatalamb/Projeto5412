@@ -9,7 +9,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 Consulte Implantação para saber como implantar o projeto.
 
 📋 Pré-requisitos
-De que coisas você precisa para instalar o software e como instalá-lo?
+
 
 Exemplos:
 
@@ -50,11 +50,12 @@ Explique que eles verificam esses testes e porquê.
 Dar exemplos
 📦 Implantação
 Adicione notas adicionais sobre como implantar isso em um sistema ativo
-
+__________________________________________
 🛠️ Construído com:
 IntelliJ IDEA(Community edition V.231.8109.175)
 
-Java.
+Formato: Java.
+__________________________________________
 
 Dropwizard - O framework web usado
 Maven - Gerente de Dependência
@@ -68,16 +69,3 @@ Nós usamos SemVer para controle de versão. Para as versões disponíveis, obse
 
 ✒️ Autores
 Renata,Samara,Mariana,Daniel
-
-Um desenvolvedor - Trabalho Inicial - umdesenvolvedor
-Fulano De Tal - Documentação - fulanodetal
-Você também pode ver a lista de todos os colaboradores que participaram deste projeto.
-
-📄 Licença
-Este projeto está sob a licença (sua licença) - veja o arquivo LICENSE.md para detalhes.
-
-🎁 Expressões de gratidão
-Conte a outras pessoas sobre este projeto 📢;
-Convide alguém da equipe para uma cerveja 🍺;
-Um agradecimento publicamente 🫂;
-etc.
