@@ -69,7 +69,9 @@ public class Ingrediente {
     }
 
     public void adicionarQuantidade(int quantidade) {
+        this.quantidade += quantidade;
     }
+
 
     public String getDataValidade() {
         return "";
