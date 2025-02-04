@@ -1,8 +1,5 @@
 package main.java.com.confeitaria.view;
 
-import main.java.com.confeitaria.view.IngredienteGUI;
-import main.java.com.confeitaria.view.ProdutoFinalGUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
