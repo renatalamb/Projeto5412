@@ -26,6 +26,7 @@ public class MenuGUI extends JFrame {
         btnCadastrarIngrediente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha a janela atual
                 new IngredienteInterface().setVisible(true);
             }
         });
@@ -33,9 +34,11 @@ public class MenuGUI extends JFrame {
         btnCadastrarProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha a janela atual
                 new ProdutoFinalGUI().setVisible(true);
             }
         });
+
 
         panel.add(btnCadastrarIngrediente);
         panel.add(btnCadastrarProduto);
