@@ -2,7 +2,7 @@
 
 📝Descrição do projecto:
 
-Este projeto tem como objetivo desenvolver um sistema de gestão para uma pastelaria, facilitando o controle de vendas, estoque, e atendimento ao cliente. Através de uma interface intuitiva, o sistema permitirá que os funcionários gerenciem pedidos, acompanhem o inventário de ingredientes e analisem o desempenho das vendas.
+Este projeto tem como objetivo desenvolver um sistema de gestão para uma confeitaria, facilitando o controle de vendas, estoque, e atendimento ao cliente. Através de uma interface intuitiva, o sistema permitirá que os funcionários gerenciem pedidos, acompanhem o inventário de ingredientes e analisem o desempenho das vendas.
 ------------------------------------------
 📋Pre requisitos:
 
