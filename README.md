@@ -5,7 +5,7 @@
 📝Descrição do projecto:
 
 Este projeto tem como objetivo desenvolver um sistema de gestão para uma confeitaria, facilitando o controle de vendas, estoque, e atendimento ao cliente. Através de uma interface intuitiva, o sistema permitirá que os funcionários gerenciem pedidos, acompanhem o inventário de ingredientes e analisem o desempenho das vendas.
-------------------------------------------
+_________________________________________
 📋Pre requisitos:
 
 👨‍💻Sistema Operacional:
@@ -28,7 +28,7 @@ Resolução mínima de 1024x768, mas uma resolução maior é recomendada para m
 🛜Conexão com a Internet:
 Para baixar plugins, atualizações e acessar recursos online.
 __________________________________________
-🔧 Instalação:
+🔧 Desenvolvimento:
 
 Passo 1: Instalar o JDK (Java Development Kit)
 
@@ -61,7 +61,7 @@ export JAVA_HOME=/caminho/para/o/jdk
 
 Salve o arquivo e execute source ~/.bash_profile (ou o arquivo correspondente) para aplicar as mudanças.
 
-/////////////////////////////////////////
+
 
 Passo 2: Baixar e Instalar o IntelliJ IDEA
 
@@ -70,14 +70,12 @@ Acesse o site oficial do JetBrains IntelliJ IDEA.
 
 Escolha a versão Community (gratuita) ou a versão Ultimate (paga) e faça o download.
 
-/////////////////////////////////////////
+
 
 2: Instalar o IntelliJ IDEA:
 Execute o instalador e siga as instruções na tela.
-
 Durante a instalação, você pode escolher criar um atalho na área de trabalho e associar arquivos .java ao IntelliJ.
 
-////////////////////////////////////////
 
 Passo 3: Configurar o IntelliJ IDEA
 
@@ -95,7 +93,7 @@ Selecione "Java" e clique em "Next".
 Escolha o JDK que você configurou anteriormente e clique em "Next".
 Dê um nome ao seu projeto e escolha o local onde deseja salvá-lo. Clique em "Finish".
 
-//////////////////////////////////////////
+
 
 Passo 4: Escrever e Executar um Programa Java
 
@@ -116,13 +114,12 @@ public class Main {
 Clique com o botão direito na classe que você criou e selecione "Run 'Main.main()'".
 O resultado será exibido na janela de saída na parte inferior do IntelliJ.
 
-//////////////////////////////////////////
+
 
 Passo 5: Instalar Plugins (opcional)
 
 Você pode instalar plugins adicionais para melhorar sua experiência de desenvolvimento. Vá em "File" > "Settings" > "Plugins" e explore as opções disponíveis.
 
-//////////////////////////////////////////
 _________________________________________
 ⚙️Como executar testes para o sistema:
 
@@ -130,7 +127,7 @@ _________________________________________
 Certifique-se de que o IntelliJ IDEA está instalado e configurado corretamente.
 Abra seu projeto Java no IntelliJ.
 
-//////////////////////////////////////////
+
 
 2.Adicionar Dependências de Teste:
 Se você estiver usando o Maven, adicione as dependências de teste no seu arquivo pom.xml. Por exemplo, para JUnit:
@@ -149,7 +146,7 @@ Criar uma Classe de Teste:
 Crie uma nova classe de teste. Clique com o botão direito na pasta src/test/java e selecione New > Java Class.
 Nomeie a classe de teste, por exemplo, MyClassTest.
 
-//////////////////////////////////////////
+
 
 4.Escrever Testes:
 Use anotações do JUnit para escrever seus testes. Por exemplo: 
@@ -165,24 +162,21 @@ public class MyClassTest {
     }
 }
 
-//////////////////////////////////////////
+
 
 5.Executar os Testes:
 Clique com o botão direito na classe de teste ou no método de teste e selecione Run 'MyClassTest' ou Run 'testMyMethod'.
 Você também pode executar todos os testes do projeto clicando com o botão direito na pasta test e selecionando Run 'All Tests'.
 
-//////////////////////////////////////////
 
 6.Verificar Resultados:
 Após a execução, verifique a janela de resultados de teste na parte inferior do IntelliJ para ver quais testes passaram ou falharam.
 
-//////////////////////////////////////////
 
 7.Depuração (Opcional):
 Se um teste falhar, você pode depurá-lo clicando com o botão direito e selecionando Debug 'MyClassTest'.
 
-//////////////////////////////////////////
-------------------------------------------
+_________________________________________
 
 🔩 Os testes são verificados por várias razões importantes:
 
@@ -229,26 +223,4 @@ __________________________________________
 
 📌 Versão
 Nós usamos SemVer para controle de versão. Para as versões disponíveis, observe as tags neste repositório.
-
-------------------------------------------
-
-🧦Passos do projecto:
-
-1: Utilizar uma ferramenta para programar o codigo.
-
-2: Criar um Projeto Java
-
-3: Criar uma Classe Java
-
-4: Compilar o Código Java
-
-5: testar o programa compilado.
-
-6: Criar e Usar Métodos
-
-7: Trabalhar com Arrays
-
-8: Manipular Exceções
-
-9: Executar e finalizar programa.
 __________________________________________
