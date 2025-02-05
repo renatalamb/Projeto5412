@@ -52,6 +52,7 @@ public class ProdutoFinalGUI extends JFrame {
         JButton atualizarEstoqueButton = new JButton("Atualizar Estoque");
         JButton registrarVendaButton = new JButton("Registrar Venda");
         JButton exibirHistoricoButton = new JButton("Exibir Histórico");
+        JButton voltarButton = new JButton("Voltar");
 
 
         historicoArea = new JTextArea(10, 30);
@@ -74,6 +75,7 @@ public class ProdutoFinalGUI extends JFrame {
         panel.add(exibirHistoricoButton);
         panel.add(tabelaScrollPane);
         panel.add(new JScrollPane(historicoArea));
+        panel.add(voltarButton);
 
         add(panel);
 
@@ -142,13 +144,12 @@ public class ProdutoFinalGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um produto na tabela.");
             }
         });
-    /*
-        exportarCSVButton.addActionListener(e -> {
-            produtoRepository.exportarParaCSV(produtos);
-            JOptionPane.showMessageDialog(null, "Dados exportados para CSV com sucesso!");
-        });
 
-     */
+     voltarButton.addActionListener(e -> {
+            dispose(); // Fecha a janela atual
+            new MenuGUI().setVisible(true); // Abre o menu principal
+        });
+     
 
     }
 
