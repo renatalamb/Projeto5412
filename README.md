@@ -1,3 +1,5 @@
+✒️ Autor do Read.me: Daniel Mack
+
 📔Titulo: Gestão de uma confeitaria
 
 📝Descrição do projecto:
@@ -250,6 +252,3 @@ Nós usamos SemVer para controle de versão. Para as versões disponíveis, obse
 
 9: Executar e finalizar programa.
 __________________________________________
-
-✒️ Autor do Read.me
-Daniel Mack
