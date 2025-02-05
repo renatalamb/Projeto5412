@@ -213,9 +213,9 @@ __________________________________________
 
 🪟Windows11
 
-IntelliJ IDEA(Community edition V.231.8109.175)
+IntelliJ IDEA(Community edition)
 
-Formato: ☕Java
+☕Java
 __________________________________________
 
 🖇️ Membros do Projecto
@@ -223,5 +223,7 @@ Renata,Mariana,Samara,Daniel
 __________________________________________
 
 📌 Versão
-Nós usamos SemVer para controle de versão. Para as versões disponíveis, observe as tags neste repositório.
+🪟Windows 11(24H2)
+IntelliJ IDEA(Community edition V.231.8109.175)
+☕Java(Oracle OpenJDK 23.0.2)
 __________________________________________
