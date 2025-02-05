@@ -93,7 +93,7 @@ Escolha o JDK que você configurou anteriormente e clique em "Next".
 Dê um nome ao seu projeto e escolha o local onde deseja salvá-lo. Clique em "Finish".
 
 
-///////////////////////////
+//////////////////////
 Passo 4: Escrever e Executar um Programa Java
 
 1:Criar uma nova classe Java
