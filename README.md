@@ -61,7 +61,7 @@ export JAVA_HOME=/caminho/para/o/jdk
 
 Salve o arquivo e execute source ~/.bash_profile (ou o arquivo correspondente) para aplicar as mudanças.
 
--------------
+/////////////////////////
 
 Passo 2: Baixar e Instalar o IntelliJ IDEA
 
@@ -75,8 +75,7 @@ Escolha a versão Community (gratuita) ou a versão Ultimate (paga) e faça o do
 2: Instalar o IntelliJ IDEA:
 Execute o instalador e siga as instruções na tela.
 Durante a instalação, você pode escolher criar um atalho na área de trabalho e associar arquivos .java ao IntelliJ.
-------------------
-
+//////////////////////////
 Passo 3: Configurar o IntelliJ IDEA
 
 1:Iniciar o IntelliJ IDEA:
@@ -94,7 +93,7 @@ Escolha o JDK que você configurou anteriormente e clique em "Next".
 Dê um nome ao seu projeto e escolha o local onde deseja salvá-lo. Clique em "Finish".
 
 
----------------------
+///////////////////////////
 Passo 4: Escrever e Executar um Programa Java
 
 1:Criar uma nova classe Java
@@ -114,7 +113,7 @@ public class Main {
 Clique com o botão direito na classe que você criou e selecione "Run 'Main.main()'".
 O resultado será exibido na janela de saída na parte inferior do IntelliJ.
 
---------------------
+////////////////////////////////
 
 Passo 5: Instalar Plugins (opcional)
 
