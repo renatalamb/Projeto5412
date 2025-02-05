@@ -23,7 +23,7 @@ class IngredienteGUI extends JFrame {
         controller = new IngredienteController();
 
         setTitle("Gestão de Ingredientes");
-        setSize(700, 500);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
