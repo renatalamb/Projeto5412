@@ -12,15 +12,16 @@ public class MenuGUI extends JFrame {
 
     public MenuGUI() {
         setTitle("Menu Principal");
-        setSize(400, 200);
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(2, 1, 10, 10));
+        panel.setLayout(new GridLayout(3, 1, 10, 10));
 
         JButton btnCadastrarIngrediente = new JButton("Cadastrar Ingrediente");
         JButton btnCadastrarProduto = new JButton("Cadastrar Produto");
+        JButton btnCadastrarBebida = new JButton("Cadastrar Bebida");
 
         // Adicionar ações aos botões
         btnCadastrarIngrediente.addActionListener(new ActionListener() {
@@ -42,6 +43,7 @@ public class MenuGUI extends JFrame {
 
         panel.add(btnCadastrarIngrediente);
         panel.add(btnCadastrarProduto);
+        panel.add(btnCadastrarBebida);
 
         add(panel);
     }
