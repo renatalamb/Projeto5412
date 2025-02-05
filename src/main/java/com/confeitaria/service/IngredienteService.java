@@ -98,25 +98,26 @@ public class IngredienteService {
         return null;
     }
 
-    public List<Ingrediente> carregarIngredientesDoCSV(String csvPath) {
-        List<Ingrediente> ingredientes = new ArrayList<>();
+    public void carregarIngredientesDoCSV(String csvPath) {
+        listaIngredientes.clear(); // Evita duplicação de dados
         try {
             List<String> linhas = Files.readAllLines(Paths.get(CSV_PATH));
             for (String linha : linhas) {
                 String[] dados = linha.split(";");
-                String nome = dados[0];
-                int quantidade = Integer.parseInt(dados[1]);
-                String unidadeMedida = dados[2];
-                int quantMinima = Integer.parseInt(dados[3]);
-                LocalDate dataValidade = LocalDate.parse(dados[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                if (dados.length == 5) {
+                    String nome = dados[0];
+                    int quantidade = Integer.parseInt(dados[1]);
+                    String unidadeMedida = dados[2];
+                    int quantMinima = Integer.parseInt(dados[3]);
+                    LocalDate dataValidade = LocalDate.parse(dados[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-                Ingrediente ingrediente = new Ingrediente(nome, quantidade, unidadeMedida, quantMinima, dataValidade);
-                ingredientes.add(ingrediente);
+                    Ingrediente ingrediente = new Ingrediente(nome, quantidade, unidadeMedida, quantMinima, dataValidade);
+                    listaIngredientes.add(ingrediente); // Adiciona à lista utilizada no sistema
+                }
             }
         } catch (IOException e) {
-            System.out.println("Erro ao carregar ingredientes do CSV.");
+            System.out.println("Erro ao carregar ingredientes do CSV: " + e.getMessage());
         }
-        return ingredientes;
     }
 
 
