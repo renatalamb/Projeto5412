@@ -76,6 +76,7 @@ Escolha a versão Community (gratuita) ou a versão Ultimate (paga) e faça o do
 Execute o instalador e siga as instruções na tela.
 Durante a instalação, você pode escolher criar um atalho na área de trabalho e associar arquivos .java ao IntelliJ.
 //////////////////////////
+
 Passo 3: Configurar o IntelliJ IDEA
 
 1:Iniciar o IntelliJ IDEA:
@@ -94,6 +95,7 @@ Dê um nome ao seu projeto e escolha o local onde deseja salvá-lo. Clique em "F
 
 
 //////////////////////
+
 Passo 4: Escrever e Executar um Programa Java
 
 1:Criar uma nova classe Java
