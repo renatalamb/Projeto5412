@@ -36,12 +36,17 @@ class IngredienteGUI extends JFrame {
         JButton btnAdicionarEstoque = new JButton("Adicionar ao Estoque");
         JButton btnRetirarEstoque = new JButton("Retirar do Estoque");
         JButton btnHistorico = new JButton("Histórico do Estoque");
+        JButton btnVoltar = new JButton("Voltar");
 
         btnRegistrar.addActionListener(e -> registrarIngrediente());
-        btnAtualizar.addActionListener(e -> atualizarTabela()); // Atualiza a tabela ao clicar
+        btnAtualizar.addActionListener(e -> atualizarTabela());
         btnAdicionarEstoque.addActionListener(e -> modificarEstoque(true));
         btnRetirarEstoque.addActionListener(e -> modificarEstoque(false));
         btnHistorico.addActionListener(e -> exibirHistorico());
+        btnVoltar.addActionListener(e -> {
+            dispose(); // Fecha a janela atual
+            new MenuGUI().setVisible(true); // Abre o menu principal
+        });
 
         JPanel panel = new JPanel();
         panel.add(btnRegistrar);
@@ -49,31 +54,23 @@ class IngredienteGUI extends JFrame {
         panel.add(btnAdicionarEstoque);
         panel.add(btnRetirarEstoque);
         panel.add(btnHistorico);
+        panel.add(btnVoltar);
 
         add(scrollPane, BorderLayout.CENTER);
         add(panel, BorderLayout.SOUTH);
 
-        atualizarTabela();  // <-- Carrega os ingredientes ao abrir a tela
+        atualizarTabela();
     }
-
 
     private void registrarIngrediente() {
         try {
             String nome = JOptionPane.showInputDialog("Nome do ingrediente:");
             int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
-
-            // Opções fixas para unidades de medida
             String[] unidades = {"ml", "unidade", "gramas"};
             String unidade = (String) JOptionPane.showInputDialog(
-                    null,
-                    "Escolha a unidade de medida:",
-                    "Unidade de Medida",
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    unidades,
-                    unidades[0]
+                    null, "Escolha a unidade de medida:", "Unidade de Medida",
+                    JOptionPane.QUESTION_MESSAGE, null, unidades, unidades[0]
             );
-
             int quantMinima = Integer.parseInt(JOptionPane.showInputDialog("Quantidade Mínima:"));
             LocalDate validade = LocalDate.parse(JOptionPane.showInputDialog("Data de Validade (dd/MM/yyyy):"), formatter);
 
@@ -86,7 +83,6 @@ class IngredienteGUI extends JFrame {
         }
     }
 
-
     private void salvarCSV(Ingrediente ingrediente) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_PATH, true))) {
             writer.write(String.format("%s;%d;%s;%d;%s\n", ingrediente.getNome(), ingrediente.getQuantidade(), ingrediente.getUnidadeMedida(), ingrediente.getQuantMinima(), ingrediente.formatarDataValidade()));
@@ -97,7 +93,7 @@ class IngredienteGUI extends JFrame {
 
     private void modificarEstoque(boolean adicionar) {
         String nome = JOptionPane.showInputDialog("Nome do ingrediente:");
-        Ingrediente ingrediente = controller.service.buscarIngrediente(nome);  // Busca no serviço
+        Ingrediente ingrediente = controller.service.buscarIngrediente(nome);
 
         if (ingrediente == null) {
             JOptionPane.showMessageDialog(this, "Ingrediente não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -106,50 +102,26 @@ class IngredienteGUI extends JFrame {
 
         try {
             int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
-
-            if (adicionar) {
-                // Se for para adicionar ao estoque
-                ingrediente.adicionarQuantidade(quantidade);
-            } else {
-                // Se for para retirar do estoque
-                ingrediente.adicionarQuantidade(-quantidade);
-            }
-
-            // Atualiza o estoque no arquivo CSV
-            controller.service.atualizarIngredienteNoCSV(ingrediente);  // Agora corretamente acessado
-
-            // Registra a movimentação no histórico
+            ingrediente.adicionarQuantidade(adicionar ? quantidade : -quantidade);
+            controller.service.atualizarIngredienteNoCSV(ingrediente);
             controller.service.registrarMovimentacao(nome, quantidade, adicionar);
-
-            // Atualiza a tabela após a modificação
             atualizarTabela();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Quantidade inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-
-
-
     private void atualizarTabela() {
         tableModel.setRowCount(0);
-
-        // Força a atualização dos ingredientes a partir do CSV
         controller.service.carregarIngredientesDoCSV(CSV_PATH);
-
         List<Ingrediente> ingredientes = controller.service.listarIngredientes();
         for (Ingrediente ing : ingredientes) {
             tableModel.addRow(new Object[]{ing.getNome(), ing.getQuantidade(), ing.getUnidadeMedida(), ing.getQuantMinima(), ing.formatarDataValidade()});
         }
     }
 
-
-
-
-    // Método para exibir histórico
     private void exibirHistorico() {
         StringBuilder historico = new StringBuilder("📜 Histórico de Movimentações:\n");
-
         try (BufferedReader reader = new BufferedReader(new FileReader(HISTORICO_PATH))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -158,14 +130,10 @@ class IngredienteGUI extends JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Erro ao carregar histórico!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
         JOptionPane.showMessageDialog(this, historico.toString(), "Histórico de Estoque", JOptionPane.INFORMATION_MESSAGE);
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new IngredienteGUI().setVisible(true));
     }
-
-
 }
