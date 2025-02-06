@@ -39,16 +39,19 @@ public class BebidaService {
     }
 
     // Atualiza o estoque de uma bebida
-    public boolean atualizarEstoqueBebida(Bebida bebida, int quantidade, boolean flag) {
-        if (quantidade > 0) {
-            bebida.setQuantidade(bebida.getQuantidade() + quantidade); // Adiciona ao estoque
-            registrarMovimentacao(bebida, quantidade, "Entrada");
-            verificarLimiteMinimo(bebida);
+    public boolean atualizarEstoqueBebida(Bebida bebida, int quantidade, boolean adicionar) {
+        if (adicionar) {
+            bebida.setQuantidade(bebida.getQuantidade() + quantidade);
         } else {
-            System.out.println("Erro: A quantidade deve ser maior que zero.");
+            if (bebida.getQuantidade() >= quantidade) {
+                bebida.setQuantidade(bebida.getQuantidade() - quantidade);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro: Estoque insuficiente para a venda!");
+            }
         }
-        return flag;
+        return adicionar;
     }
+
 
     // Registra uma venda de uma bebida
     public void registrarVendaBebida(Bebida bebida, int quantidadeVendida) {
@@ -151,5 +154,11 @@ public class BebidaService {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar o arquivo CSV!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void atualizarEstoque(Bebida bebidaSelecionada, int quantidade, boolean b) {
+    }
+
+    public void exibirHistoricoMovimentacoes(Bebida bebidaSelecionada) {
     }
 }
