@@ -23,7 +23,7 @@ class IngredienteGUI extends JFrame {
         controller = new IngredienteController();
 
         setTitle("Gestão de Ingredientes");
-        setSize(900, 700);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -65,18 +65,17 @@ class IngredienteGUI extends JFrame {
     private void registrarIngrediente() {
         try {
             String nome = JOptionPane.showInputDialog("Nome do ingrediente:");
-            int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
-            String[] unidades = {"ml", "unidade", "gramas"};
+            String[] unidades = {"litro(s)", "unidade(s)", "quilograma(s)"};
             String unidade = (String) JOptionPane.showInputDialog(
                     null, "Escolha a unidade de medida:", "Unidade de Medida",
                     JOptionPane.QUESTION_MESSAGE, null, unidades, unidades[0]
             );
+            int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Quantidade:"));
             int quantMinima = Integer.parseInt(JOptionPane.showInputDialog("Quantidade Mínima:"));
             LocalDate validade = LocalDate.parse(JOptionPane.showInputDialog("Data de Validade (dd/MM/yyyy):"), formatter);
 
             Ingrediente ingrediente = new Ingrediente(nome, quantidade, unidade, quantMinima, validade);
-            controller.service.adicionarIngrediente(ingrediente);
-            salvarCSV(ingrediente);
+            controller.service.adicionarIngrediente(ingrediente);  // Verifique aqui se já está gravando no CSV
             atualizarTabela();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao registrar ingrediente!", "Erro", JOptionPane.ERROR_MESSAGE);
