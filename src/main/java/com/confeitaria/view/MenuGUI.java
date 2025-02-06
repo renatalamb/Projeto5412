@@ -37,6 +37,14 @@ public class MenuGUI extends JFrame {
             }
         });
 
+        btnCadastrarBebida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fecha a janela atual
+                new BebidaGUI().setVisible(true);
+            }
+        });
+
 
         panel.add(btnCadastrarIngrediente);
         panel.add(btnCadastrarProduto);
